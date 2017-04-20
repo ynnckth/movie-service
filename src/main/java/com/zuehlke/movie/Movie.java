@@ -3,6 +3,7 @@ package com.zuehlke.movie;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@SuppressWarnings("unused")
 public class Movie {
 
     private final long id;
@@ -65,13 +66,8 @@ public class Movie {
 
         Movie movie = (Movie) o;
 
-        if (id != movie.id) return false;
-        if (year != movie.year) return false;
-        if (!title.equals(movie.title)) return false;
-        if (!poster.equals(movie.poster)) return false;
-        if (!plot.equals(movie.plot)) return false;
-        if (!genre.equals(movie.genre)) return false;
-        return imdbId.equals(movie.imdbId);
+        return id == movie.id && year == movie.year && title.equals(movie.title) && poster.equals(movie.poster)
+                && plot.equals(movie.plot) && genre.equals(movie.genre) && imdbId.equals(movie.imdbId);
     }
 
     @Override
