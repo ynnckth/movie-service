@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 class MovieRepository {
 
@@ -20,12 +21,17 @@ class MovieRepository {
 
         try {
             byte[] bytes = Files.readAllBytes(Paths.get("./src/main/resources/movies.json"));
-            return mapper.readValue(bytes, new TypeReference<List<Movie>>() {});
+            return mapper.readValue(bytes, new TypeReference<List<Movie>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return Collections.emptyList();
+    }
+
+    Optional<Movie> getMovieById(long id) {
+        return getAll().stream().filter(m -> m.getId() == id).findFirst();
     }
 
 }
